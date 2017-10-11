@@ -16,10 +16,13 @@ class Idol(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=50)
-    debut_date = models.DateField
+    debut_date = models.DateField()
     members = models.ManyToManyField(
         Idol,
-        through='Membership'
+        through='Membership',
+        # through_fields 순서 = (source , target)
+        through_fields=('group', 'idol')
+
     )
 
     def __str__(self):
@@ -27,8 +30,21 @@ class Group(models.Model):
 
 
 class Membership(models.Model):
-    idol = models.ForeignKey(Idol, on_delete=models.CASCADE)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    idol = models.ForeignKey(
+        Idol,
+        on_delete=models.CASCADE,
+        related_name='membership_set'
+    )
+    group = models.ForeignKey(
+        Group,
+        on_delete=models.CASCADE
+    )
+    recommender = models.ForeignKey(
+        Idol,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='recommender_membership_set'
+    )
     joined_date = models.DateField()
     is_active = models.BooleanField()
 
