@@ -20,4 +20,8 @@ class Restaurant(Place):
     serves_pizza = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return f'{self.name} Restaurant'
+
+
+class Supplier(Place):
+    customer = models.ManyToManyField(Place, related_name='customer_place_set')
