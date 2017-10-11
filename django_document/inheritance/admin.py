@@ -2,6 +2,11 @@ from django.contrib import admin
 
 from .models import Teacher, Student, School, Restaurant, Place, Champion
 
+
+class ChampionAdmin(admin.ModelAdmin):
+    list_display = ('name', 'champion_type', 'rank',)
+    list_editable = ('rank',)
+
 admin.site.register(Student)
 admin.site.register(Teacher)
 admin.site.register(School)
