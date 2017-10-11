@@ -10,6 +10,8 @@ __all__ = (
 class Idol(models.Model):
     name = models.CharField(max_length=30)
 
+    # objects = models.Manager() (숨겨져있는거)
+
     def __str__(self):
         return self.name
 

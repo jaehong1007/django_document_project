@@ -9,7 +9,9 @@ from .models import (
     Pizza,
     FacebookUser,
     InstagramUser,
-    Membership, Group, Idol)
+    Membership, Group, Idol,
+    Place, Restaurant, Waiter
+    )
 
 admin.site.register(Car)
 admin.site.register(Manufacturer)
@@ -21,3 +23,6 @@ admin.site.register(InstagramUser)
 admin.site.register(Idol)
 admin.site.register(Group)
 admin.site.register(Membership)
+admin.site.register(Place)
+admin.site.register(Restaurant)
+admin.site.register(Waiter)
