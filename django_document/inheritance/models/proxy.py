@@ -2,6 +2,7 @@ from django.db import models
 
 __all__ = (
     'Champion',
+    'Supporter',
 )
 
 
@@ -16,6 +17,7 @@ class Champion(models.Model):
     name = models.CharField(max_length=30)
 
     class Meta:
+        verbose_name = '챔피언'
         ordering = ['rank']
 
     def __str__(self):
@@ -27,17 +29,19 @@ class SupporterManager(models.Manager):
         return super().get_queryset().filter(champion_type='supporter')
 
 
-class Supporter(models.Model):
+class Supporter(Champion):
     objects = SupporterManager()
 
     class Meta:
         proxy = True
-        ordering = ['name']
 
     def buy_supporter_item(self):
-        print(f'{self.name}은 서포터 아이템을 구입했다.')
+        print(f'{self.name}은 서포터 아이템을 샀다')
 
 
-class Mid(models.Model):
+class Midliner(Champion):
+    class Meta:
+        proxy = True
+
     def go_to_mid(self):
         print(f'{self.name}은 미드에 도착했다')
